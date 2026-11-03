@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>DUSTLINE — Baja Desert Racing</title>
+  <script type="module" crossorigin src="./assets/index-Cc3kIUJx.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-UZMUB3kq.css">
+</head>
+<body>
+<canvas id="gl"></canvas>
+
+<div id="loading" class="screen">
+  <div class="logo">DUST<span>LINE</span></div>
+  <div class="sub">Baja desert racing</div>
+  <div class="bar"><div id="loadfill"></div></div>
+  <div id="loadtext">Building the desert…</div>
+</div>
+
+<div id="menu" class="screen hidden">
+  <div class="menu-left">
+    <div class="logo small">DUST<span>LINE</span></div>
+    <div class="sub">Baja desert racing • Trophy Trucks &amp; Pre-Runners</div>
+
+    <h3>Class</h3>
+    <div class="cards" id="vehicleCards">
+      <button class="card sel" data-v="trophy"><b>Trophy Truck</b><i>950 hp tube chassis • 4-link solid rear • RWD</i></button>
+      <button class="card" data-v="prerunner"><b>Pre-Runner</b><i>Street truck, long travel • 4WD</i></button>
+    </div>
+    <div class="summary" id="buildSummary"></div>
+    <button id="garageBtn" class="ghost wide">Open garage</button>
+
+    <div class="row">
+      <div>
+        <h3>Time of day</h3>
+        <div class="seg" id="todSeg">
+          <button data-v="morning">Morning</button><button data-v="noon">Noon</button><button data-v="golden" class="sel">Golden</button><button data-v="sunset">Sunset</button><button data-v="night">Night</button>
+        </div>
+      </div>
+      <div>
+        <h3>Graphics</h3>
+        <div class="seg" id="qualSeg">
+          <button data-v="low">Low</button><button data-v="medium">Med</button><button data-v="high" class="sel">High</button><button data-v="ultra">Ultra</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <h3>Map</h3>
+        <div class="seg" id="mapSeg">
+          <button data-v="desert" class="sel">Mojave Desert</button><button data-v="dunes">Dune Sea</button>
+        </div>
+      </div>
+      <div>
+        <h3>Mode</h3>
+        <div class="seg" id="modeSeg">
+          <button data-v="race" class="sel">Race</button><button data-v="free">Free roam</button>
+        </div>
+      </div>
+      <div>
+        <h3>Laps</h3>
+        <div class="seg" id="lapSeg">
+          <button data-v="1">1</button><button data-v="3" class="sel">3</button><button data-v="5">5</button>
+        </div>
+      </div>
+      <div>
+        <h3>Units</h3>
+        <div class="seg" id="unitSeg">
+          <button data-v="mph" class="sel">MPH</button><button data-v="kph">KM/H</button>
+        </div>
+      </div>
+    </div>
+    <button id="startBtn" class="go">START ENGINE</button>
+    <div class="keys">
+      <span><kbd>W</kbd><kbd>S</kbd> throttle / brake-reverse</span>
+      <span><kbd>A</kbd><kbd>D</kbd> steer</span>
+      <span><kbd>Space</kbd> handbrake</span>
+      <span><kbd>C</kbd> camera (3rd → 1st person)</span><span><kbd>X</kbd> cinematic side cam (again = flip side)</span><span><kbd>L</kbd> light covers on / off</span><span><kbd>Z</kbd> suspension cutaway</span>
+      <span><kbd>R</kbd> reset to track</span>
+      <span><kbd>T</kbd> traction control</span>
+      <span><kbd>B</kbd> look back</span>
+      <span><kbd>Esc</kbd> pause</span>
+      <span><kbd>Y</kbd> suspension telemetry</span>
+    </div>
+  </div>
+</div>
+
+<div id="garage" class="screen hidden">
+  <div class="gar">
+    <div class="garHead"><div class="logo small">GAR<span>AGE</span></div><button id="garReset" class="link">Reset build</button></div>
+    <div class="garTabs" id="garTabs"></div>
+    <div class="garBody" id="garBody"></div>
+    <div class="garStats" id="garStats"></div>
+    <button id="garDone" class="go">Done</button>
+  </div>
+</div>
+
+<div id="dragHint">Drag to spin the truck &middot; scroll to zoom</div>
+<div id="cineTop"></div><div id="cineBot"></div>
+<div id="hud" class="hidden">
+  <div class="hud-tl">
+    <div class="pos"><b id="posN">1</b><span id="posOf">/6</span></div>
+    <div class="lap">LAP <b id="lapN">1</b>/<span id="lapOf">3</span></div>
+    <div class="time" id="timeT">0:00.0</div>
+    <div class="best" id="lapT"></div>
+  </div>
+  <canvas id="mini" width="220" height="220"></canvas>
+  <canvas id="susp" width="300" height="220"></canvas>
+  <div class="hud-br">
+    <canvas id="tach" width="360" height="260"></canvas>
+  </div>
+  <div id="camLabel"></div>
+  <div id="banner"></div>
+  <div id="toast"></div>
+  <div id="board"></div>
+  <div id="fps"></div>
+</div>
+
+<div id="pause" class="screen hidden">
+  <div class="panel">
+    <h2>Paused</h2>
+    <button id="resumeBtn" class="go">Resume</button>
+    <button id="quitBtn" class="ghost">Quit to menu</button>
+    <div class="keys"><span><kbd>M</kbd> mute</span><span><kbd>F</kbd> fullscreen</span><span><kbd>H</kbd> hide HUD</span><span><kbd>V</kbd> FPS</span></div>
+  </div>
+</div>
+
+<div id="results" class="screen hidden">
+  <div class="panel wide">
+    <h2 id="resTitle">Race complete</h2>
+    <table id="resTable"></table>
+    <button id="againBtn" class="go">Race again</button>
+    <button id="menuBtn" class="ghost">Back to menu</button>
+  </div>
+</div>
+
+</body>
+</html>
