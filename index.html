@@ -4,98 +4,94 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <title>DUSTLINE — Baja Desert Racing</title>
-  <script type="module" crossorigin src="./assets/index-BGqpP6Aa.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-UZMUB3kq.css">
+  <script type="module" crossorigin src="./assets/index-Dtg3H2La.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Dp1AMmB-.css">
 </head>
 <body>
 <canvas id="gl"></canvas>
 
 <div id="loading" class="screen">
-  <div class="logo">DUST<span>LINE</span></div>
+  <div class="logo">DUSTLINE</div>
   <div class="sub">Baja desert racing</div>
   <div class="bar"><div id="loadfill"></div></div>
   <div id="loadtext">Building the desert…</div>
 </div>
 
 <div id="menu" class="screen hidden">
-  <div class="menu-left">
-    <div class="logo small">DUST<span>LINE</span></div>
-    <div class="sub">Baja desert racing • Trophy Trucks &amp; Pre-Runners</div>
+  <aside class="side menu-left">
+    <header class="brand">
+      <div class="logo small">DUSTLINE</div>
+      <div class="sub">Baja desert racing</div>
+    </header>
 
-    <h3>Class</h3>
-    <div class="cards" id="vehicleCards">
-      <button class="card sel" data-v="trophy"><b>Trophy Truck</b><i>950 hp tube chassis • 4-link solid rear • RWD</i></button>
-      <button class="card" data-v="prerunner"><b>Pre-Runner</b><i>Street truck, long travel • 4WD</i></button>
-    </div>
-    <div class="summary" id="buildSummary"></div>
-    <button id="garageBtn" class="ghost wide">Open garage</button>
+    <section>
+      <h3>Vehicle</h3>
+      <div class="cards" id="vehicleCards">
+        <button class="card sel" data-v="trophy"><b>Trophy truck</b><i>Tube chassis, 950 hp, RWD</i></button>
+        <button class="card" data-v="prerunner"><b>Pre-runner</b><i>Street truck, 4WD</i></button>
+      </div>
+      <div class="build">
+        <div><small>Current build</small><span id="buildSummary"></span></div>
+        <button id="garageBtn" class="ghost">Garage</button>
+      </div>
+    </section>
 
-    <div class="row">
-      <div>
-        <h3>Time of day</h3>
-        <div class="seg" id="todSeg">
-          <button data-v="morning">Morning</button><button data-v="noon">Noon</button><button data-v="golden" class="sel">Golden</button><button data-v="sunset">Sunset</button><button data-v="night">Night</button>
-        </div>
+    <section>
+      <h3>Event</h3>
+      <div class="spec">
+        <label>Course</label><div class="seg" id="mapSeg"><button data-v="desert" class="sel">Mojave</button><button data-v="dunes">Dune Sea</button></div>
+        <label>Mode</label><div class="seg" id="modeSeg"><button data-v="race" class="sel">Race</button><button data-v="free">Free roam</button></div>
+        <label>Laps</label><div class="seg" id="lapSeg"><button data-v="1">1</button><button data-v="3" class="sel">3</button><button data-v="5">5</button></div>
+        <label>Time</label><div class="seg" id="todSeg"><button data-v="morning">Morning</button><button data-v="noon">Noon</button><button data-v="golden" class="sel">Golden</button><button data-v="sunset">Sunset</button><button data-v="night">Night</button></div>
+        <label>Day cycle</label><div class="seg" id="cycleSeg"><button data-v="on" class="sel">On, 24 min</button><button data-v="off">Off</button></div>
       </div>
-      <div>
-        <h3>Graphics</h3>
-        <div class="seg" id="qualSeg">
-          <button data-v="low">Low</button><button data-v="medium">Med</button><button data-v="high" class="sel">High</button><button data-v="ultra">Ultra</button>
-        </div>
+    </section>
+
+    <section>
+      <h3>Settings</h3>
+      <div class="spec">
+        <label>Graphics</label><div class="seg" id="qualSeg"><button data-v="low">Low</button><button data-v="medium">Medium</button><button data-v="high" class="sel">High</button><button data-v="ultra">Ultra</button></div>
+        <label>Units</label><div class="seg" id="unitSeg"><button data-v="mph" class="sel">mph</button><button data-v="kph">km/h</button></div>
       </div>
-    </div>
-    <div class="row">
-      <div>
-        <h3>Map</h3>
-        <div class="seg" id="mapSeg">
-          <button data-v="desert" class="sel">Mojave Desert</button><button data-v="dunes">Dune Sea</button>
+    </section>
+
+    <footer class="side-foot">
+      <button id="startBtn" class="go">Start</button>
+      <details class="controls">
+        <summary>Controls</summary>
+        <div class="keys">
+          <span><kbd>W</kbd><kbd>S</kbd></span><em>Throttle, brake / reverse</em>
+          <span><kbd>A</kbd><kbd>D</kbd></span><em>Steer</em>
+          <span><kbd>Space</kbd></span><em>Handbrake</em>
+          <span><kbd>C</kbd></span><em>Camera: chase / cockpit</em>
+          <span><kbd>X</kbd></span><em>Side cam (again to flip side)</em>
+          <span><kbd>Z</kbd></span><em>Suspension cutaway</em>
+          <span><kbd>Y</kbd></span><em>Suspension telemetry</em>
+          <span><kbd>L</kbd></span><em>Light covers on / off</em>
+          <span><kbd>T</kbd></span><em>Traction control</em>
+          <span><kbd>B</kbd></span><em>Look back</em>
+          <span><kbd>R</kbd></span><em>Reset to track</em>
+          <span><kbd>Esc</kbd></span><em>Pause</em>
         </div>
-      </div>
-      <div>
-        <h3>Mode</h3>
-        <div class="seg" id="modeSeg">
-          <button data-v="race" class="sel">Race</button><button data-v="free">Free roam</button>
-        </div>
-      </div>
-      <div>
-        <h3>Laps</h3>
-        <div class="seg" id="lapSeg">
-          <button data-v="1">1</button><button data-v="3" class="sel">3</button><button data-v="5">5</button>
-        </div>
-      </div>
-      <div>
-        <h3>Units</h3>
-        <div class="seg" id="unitSeg">
-          <button data-v="mph" class="sel">MPH</button><button data-v="kph">KM/H</button>
-        </div>
-      </div>
-    </div>
-    <button id="startBtn" class="go">START ENGINE</button>
-    <div class="keys">
-      <span><kbd>W</kbd><kbd>S</kbd> throttle / brake-reverse</span>
-      <span><kbd>A</kbd><kbd>D</kbd> steer</span>
-      <span><kbd>Space</kbd> handbrake</span>
-      <span><kbd>C</kbd> camera (3rd → 1st person)</span><span><kbd>X</kbd> cinematic side cam (again = flip side)</span><span><kbd>L</kbd> light covers on / off</span><span><kbd>Z</kbd> suspension cutaway</span>
-      <span><kbd>R</kbd> reset to track</span>
-      <span><kbd>T</kbd> traction control</span>
-      <span><kbd>B</kbd> look back</span>
-      <span><kbd>Esc</kbd> pause</span>
-      <span><kbd>Y</kbd> suspension telemetry</span>
-    </div>
-  </div>
+      </details>
+    </footer>
+  </aside>
 </div>
 
 <div id="garage" class="screen hidden">
-  <div class="gar">
-    <div class="garHead"><div class="logo small">GAR<span>AGE</span></div><button id="garReset" class="link">Reset build</button></div>
-    <div class="garTabs" id="garTabs"></div>
+  <aside class="side gar">
+    <header class="garHead">
+      <div class="logo small">Garage</div>
+      <button id="garReset" class="link">Reset build</button>
+    </header>
+    <nav class="garTabs" id="garTabs"></nav>
     <div class="garBody" id="garBody"></div>
     <div class="garStats" id="garStats"></div>
     <button id="garDone" class="go">Done</button>
-  </div>
+  </aside>
 </div>
 
-<div id="dragHint">Drag to spin the truck &middot; scroll to zoom</div>
+<div id="dragHint">Drag to rotate &nbsp;/&nbsp; scroll to zoom</div>
 <div id="cineTop"></div><div id="cineBot"></div>
 <div id="hud" class="hidden">
   <div class="hud-tl">
@@ -121,7 +117,7 @@
     <h2>Paused</h2>
     <button id="resumeBtn" class="go">Resume</button>
     <button id="quitBtn" class="ghost">Quit to menu</button>
-    <div class="keys"><span><kbd>M</kbd> mute</span><span><kbd>F</kbd> fullscreen</span><span><kbd>H</kbd> hide HUD</span><span><kbd>V</kbd> FPS</span></div>
+    <div class="keys"><span><kbd>M</kbd></span><em>Mute</em><span><kbd>F</kbd></span><em>Fullscreen</em><span><kbd>H</kbd></span><em>Hide HUD</em><span><kbd>V</kbd></span><em>Frame rate</em></div>
   </div>
 </div>
 
