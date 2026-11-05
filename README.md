@@ -70,6 +70,7 @@ Gamepad: left stick steer, RT/LT throttle/brake, A handbrake, Y or RB camera, X 
   and rebound.
 - **Night race** — *Night* in the Time of day row: starry sky, moonlight, bloom. Every light you have fitted works: the headlights, A-pillar pods, roof bar and bumper bar
   throw real beams (KC yellow, Baja clear or amber) and the face lenses glow.
+- **Rock lights**: eight LED pods under the fenders (two per wheel, bolted to the underside of the wheel-well tubs). At night they light the tyres, arms, shocks and the dirt round each wheel with four real point lights on your truck. Colours: white, amber, ice blue, red, green, or an RGB colour cycle (Garage → Lights). AI trucks' pods glow too.
 - **Light covers** — KC's yellow Daylighter covers and Baja Designs' Squadron rock guards (a glossy black squircle with the white hexagon bd logo and "baja designs" wordmark, plus amber and clear) are real, removable parts: they come off on the
   night map, and the **L** key or the garage's *Light covers* buttons put them back on or take them off. The bare KC lens shows a reflector and bulb; at night, a KC cover or a black Baja guard blocks its lights completely (no beam, no glow); amber / clear Baja guards pass most of the light.
 - **Lobby** — drag the truck to spin it (and up/down to change height, scroll to zoom); it resumes its slow turn a couple of seconds after you let go.
